@@ -1,9 +1,14 @@
 from pytube import YouTube
+import os
 from tkinter import*
 from tkinter import messagebox
 
 
 # Functions for widgets
+
+def user():
+    homedir = os.path.expanduser("~")
+    return homedir+'\Downloads\Youtube Videos'
 
 def yt_download(re,path,link,name):
     try:
@@ -14,24 +19,24 @@ def yt_download(re,path,link,name):
         return False
     
 def download_in_360():
-    path=en_location.get()
+    path=user()
     link=en_link.get()
     name=en_name.get()
     re='360p'
     yt_download(re,path,link,name)
     if yt_download(re,path,link,name)==True:
-        messagebox.showinfo('Task Complete','The file '+name+'\nhas been downloaded')
+        messagebox.showinfo('Task Complete','The file '+name+'\nhas been downloaded.\nThe file is saved in '+path)
     else:
         messagebox.showinfo('An Error Occured','Sorry an error occured.\nPlease try again .')
 
 def download_in_720():
-    path=en_location.get()
+    path=user()
     link=en_link.get()
     name=en_name.get()
     re='720p'
     yt_download(re,path,link,name)
     if yt_download(re,path,link,name)==True:
-        messagebox.showinfo('Task Complete','The file '+name+'\nhas been downloaded')
+        messagebox.showinfo('Task Complete','The file '+name+'\nhas been downloaded.\nThe file is saved in '+path)
     else:
         messagebox.showinfo('An Error Occured','Sorry an error occured.\nPlease try again .')
     
@@ -48,10 +53,8 @@ window.title('YouTube Video Downloader')
 
 lab_link=Label(window,text='Link')
 lab_name=Label(window,text='Name')
-lab_location=Label(window,text='Location')
 en_link=Entry(window,width=30)
 en_name=Entry(window,width=30)
-en_location=Entry(window,width=30)
 download_360=Button(window,text='Download in 360p',command=download_in_360,bg='green')
 download_720=Button(window,text='Download in 720p',command=download_in_720,bg='orange')
 info=Button(window,text='Info',command=info,bg='light blue',font='raleway')
@@ -60,10 +63,8 @@ info=Button(window,text='Info',command=info,bg='light blue',font='raleway')
 
 lab_link.grid(column=1,row=1)
 lab_name.grid(column=1,row=2)
-lab_location.grid(column=1,row=3)
 en_link.grid(column=2,row=1)
 en_name.grid(column=2,row=2)
-en_location.grid(column=2,row=3)
 download_360.grid(column=1,row=4)
 download_720.grid(column=1,row=5)
 info.grid(column=2,row=4)
